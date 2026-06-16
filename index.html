@@ -29,6 +29,8 @@ body{
     height:340px;
     perspective:1200px;
     cursor:pointer;
+    background:#05243c; /* Prevents edge flickering during 3D transforms */
+    border-radius:16px;
 }
 
 .card-inner{
@@ -60,9 +62,9 @@ body{
         0 4px 15px rgba(0,0,0,.15);
 }
 
-/* FRONT SIDE - Optimized to completely display the image without padding */
+/* FRONT SIDE - Seamless color integration with the photo edges */
 .front{
-    background:transparent; /* Removed background so image curves blend perfectly */
+    background:#05243c; /* Match image background color for a seamless blend */
     display:flex;
     justify-content:center;
     align-items:center;
@@ -72,7 +74,7 @@ body{
 .front img{
     width:100%;
     height:100%;
-    object-fit:contain; /* Ensures the whole photo is completely displayed */
+    object-fit:contain; /* Keeps the whole photo visible without cropping */
     object-position:center;
     display:block;
 }
