@@ -29,7 +29,7 @@ body{
     height:340px;
     perspective:1200px;
     cursor:pointer;
-    border-radius:16px;
+    background:transparent; /* Removed background here so no ghost box shows during the flip */
 }
 
 .card-inner{
@@ -56,29 +56,28 @@ body{
     border-radius:16px;
     overflow:hidden;
     backface-visibility:hidden;
+    -webkit-backface-visibility:hidden; /* Chrome/Safari fallback */
     box-shadow:
         0 12px 35px rgba(0,0,0,.20),
         0 4px 15px rgba(0,0,0,.15);
 }
 
-/* FRONT SIDE - Completely seamless matching background to prevent white borders */
+/* FRONT SIDE - The color lives ONLY here now */
 .front{
-    background:#05243c; /* Fills the aspect-ratio gaps with your exact photo color */
+    background:#05243c; 
     display:flex;
     justify-content:center;
     align-items:center;
     padding:0; 
-    border:none;
-    outline:none;
+    transform: rotateY(0deg); /* Explicitly sets orientation for crisp flipping */
 }
 
 .front img{
     width:100%;
     height:100%;
-    object-fit:contain; /* Keeps the entire photo visible */
+    object-fit:contain;
     object-position:center;
     display:block;
-    border:none; /* Removes potential default browser image borders */
 }
 
 /* ERROR STATE STYLING */
@@ -95,7 +94,7 @@ body{
     color:#b71c1c;
 }
 
-/* BACK SIDE */
+/* BACK SIDE - Fully isolated background styling */
 .back{
     transform:rotateY(180deg);
     display:flex;
@@ -103,6 +102,7 @@ body{
     align-items:center;
     text-align:center;
     overflow:hidden;
+    background:#111; /* Provides a clean base ONLY for the back card, underneath the blur */
 }
 
 .back-background{
