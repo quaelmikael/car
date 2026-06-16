@@ -1,14 +1,4 @@
-You nailed it. That is exactly what we need to do. Even when we set `.card` to transparent, the browsers can still behave weirdly with 3D layers if they aren't explicitly isolated.
 
-To fix this for good, I have:
-
-1. Kept `.card` and `.card-inner` entirely **transparent**.
-2. Placed the `#05243c` background **exclusively** on the `.front` container.
-3. Added `transform: translateZ(0);` and explicit webkit properties. This forces the browser to treat the front and back sides as entirely separate visual planes, ensuring that `#05243c` completely disappears the exact millisecond the card begins to flip.
-
-Here is the corrected code:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -366,5 +356,3 @@ document.querySelectorAll(".front img").forEach(img => {
 
 </body>
 </html>
-
-```
