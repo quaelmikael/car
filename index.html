@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Calendar Events</title>
 
 <style>
@@ -62,7 +61,6 @@ body{
 }
 
 /* FRONT SIDE */
-
 .front{
     background:#fafafa;
     display:flex;
@@ -79,8 +77,21 @@ body{
     display:block;
 }
 
-/* BACK SIDE */
+/* ERROR STATE STYLING */
+.image-error-fallback {
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+    background:#ffebee;
+    color:#b71c1c;
+}
 
+/* BACK SIDE */
 .back{
     transform:rotateY(180deg);
     display:flex;
@@ -96,31 +107,23 @@ body{
     left:-20px;
     right:-20px;
     bottom:-20px;
-
     background-size:cover;
     background-position:center;
-
     filter:blur(35px) brightness(.55);
     transform:scale(1.15);
-
     z-index:1;
 }
 
 .back-overlay{
     position:absolute;
     inset:0;
-
     background:rgba(255,255,255,.12);
-
     backdrop-filter:blur(16px);
     -webkit-backdrop-filter:blur(16px);
-
     border:1px solid rgba(255,255,255,.25);
-
     box-shadow:
         inset 0 1px 1px rgba(255,255,255,.30),
         inset 0 -1px 1px rgba(255,255,255,.10);
-
     z-index:2;
 }
 
@@ -155,7 +158,6 @@ body{
 }
 
 /* RESPONSIVE */
-
 @media (max-width:1400px){
     .calendar-container{
         grid-template-columns:repeat(3,1fr);
@@ -169,149 +171,116 @@ body{
 }
 </style>
 </head>
-
 <body>
 
 <div class="calendar-container">
 
-    <!-- CARD 1 -->
     <div class="card">
         <div class="card-inner">
-
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/1.png" alt="Event 1">
             </div>
-
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
-
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- CARD 2 -->
     <div class="card">
         <div class="card-inner">
-
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/2.png" alt="Event 2">
             </div>
-
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
-
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- CARD 3 -->
     <div class="card">
         <div class="card-inner">
-
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/3.png" alt="Event 3">
             </div>
-
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
-
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- CARD 4 -->
     <div class="card">
         <div class="card-inner">
-
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/4.png" alt="Event 4">
             </div>
-
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
-
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- CARD 5 -->
     <div class="card">
         <div class="card-inner">
-
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/5.png" alt="Event 5">
             </div>
-
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
-
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- CARD 6 -->
     <div class="card">
         <div class="card-inner">
-
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/6.png" alt="Event 6">
             </div>
-
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
-
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
-
         </div>
     </div>
 
 </div>
 
 <script>
-
 /* Flip Cards */
-
 document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", () => {
         card.classList.toggle("flipped");
@@ -319,94 +288,60 @@ document.querySelectorAll(".card").forEach(card => {
 });
 
 /* Sync image onto blurred background */
-
 function syncCardBackground(imgElement){
-
     const card = imgElement.closest(".card");
-
     if(!card) return;
-
     const bg = card.querySelector(".back-background");
-
-    if(bg){
+    if(bg && imgElement.src && !imgElement.src.includes('undefined')){
         bg.style.backgroundImage = `url("${imgElement.src}")`;
     }
 }
 
-/* Initialize all cards */
+/* Initialize all cards and image fallbacks */
+const extensions = ["PNG", "jpg", "JPG", "jpeg", "JPEG"];
+const baseUrl = "https://quaelmikael.github.io/car/";
 
 document.querySelectorAll(".front img").forEach(img => {
-
     img.dataset.attempt = "0";
 
-    function updateBackground(){
+    // When successfully loaded, sync the blurred background
+    img.addEventListener("load", function() {
+        syncCardBackground(this);
+    });
+
+    // Check if image is already cached/loaded instantly
+    if(img.complete && img.naturalWidth > 0){
         syncCardBackground(img);
     }
 
-    if(img.complete && img.naturalWidth > 0){
-        updateBackground();
-    }
-
-    img.addEventListener("load", updateBackground);
-
-    img.addEventListener("error", function(){
-
+    // Fallback engine loop if file extension is incorrect
+    img.addEventListener("error", function() {
         let attempt = parseInt(this.dataset.attempt);
+        const cardNum = this.alt.replace("Event ","").trim();
 
-        const baseUrl = "https://quaelmikael.github.io/car/";
-        const cardNum = this.alt.replace("Event ","");
-
-        attempt++;
-        this.dataset.attempt = attempt;
-
-        if(attempt === 1){
-            this.src = `${baseUrl}${cardNum}.PNG`;
-        }
-        else if(attempt === 2){
-            this.src = `${baseUrl}${cardNum}.jpg`;
-        }
-        else if(attempt === 3){
-            this.src = `${baseUrl}${cardNum}.JPG`;
-        }
-        else if(attempt === 4){
-            this.src = `${baseUrl}${cardNum}.jpeg`;
-        }
-        else if(attempt === 5){
-            this.src = `${baseUrl}${cardNum}.JPEG`;
-        }
-        else{
-
-            this.parentElement.innerHTML = `
-                <div style="
-                    width:100%;
-                    height:100%;
-                    display:flex;
-                    flex-direction:column;
-                    justify-content:center;
-                    align-items:center;
-                    text-align:center;
-                    padding:20px;
-                    background:#ffebee;
-                    color:#b71c1c;
-                ">
+        if (attempt < extensions.length) {
+            const nextExt = extensions[attempt];
+            this.dataset.attempt = attempt + 1;
+            this.src = `${baseUrl}${cardNum}.${nextExt}`;
+        } else {
+            // Safe alternative to innerHTML destruction: 
+            // Hide broken image link, append error block container cleanly
+            this.style.display = "none";
+            
+            const parent = this.parentElement;
+            // Prevent duplication if error fires repeatedly
+            if(!parent.querySelector('.image-error-fallback')) {
+                const errorDiv = document.createElement("div");
+                errorDiv.className = "image-error-fallback";
+                errorDiv.innerHTML = `
                     <strong>Image Missing</strong>
-                    <span style="font-size:12px;margin-top:8px;">
-                        File ${cardNum} not found.
-                    </span>
-                </div>
-            `;
+                    <span style="font-size:12px;margin-top:8px;">File ${cardNum} not found.</span>
+                `;
+                parent.appendChild(errorDiv);
+            }
         }
     });
-
 });
-
-/* Final sync after page fully loads */
-
-window.addEventListener("load", () => {
-    document.querySelectorAll(".front img")
-        .forEach(syncCardBackground);
-});
-
 </script>
 
 </body>
