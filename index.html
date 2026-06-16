@@ -29,7 +29,6 @@ body{
     height:340px;
     perspective:1200px;
     cursor:pointer;
-    background:#05243c; /* Prevents edge flickering during 3D transforms */
     border-radius:16px;
 }
 
@@ -62,21 +61,24 @@ body{
         0 4px 15px rgba(0,0,0,.15);
 }
 
-/* FRONT SIDE - Seamless color integration with the photo edges */
+/* FRONT SIDE - Completely seamless matching background to prevent white borders */
 .front{
-    background:#05243c; /* Match image background color for a seamless blend */
+    background:#05243c; /* Fills the aspect-ratio gaps with your exact photo color */
     display:flex;
     justify-content:center;
     align-items:center;
     padding:0; 
+    border:none;
+    outline:none;
 }
 
 .front img{
     width:100%;
     height:100%;
-    object-fit:contain; /* Keeps the whole photo visible without cropping */
+    object-fit:contain; /* Keeps the entire photo visible */
     object-position:center;
     display:block;
+    border:none; /* Removes potential default browser image borders */
 }
 
 /* ERROR STATE STYLING */
