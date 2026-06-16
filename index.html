@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +15,8 @@
 }
 
 body{
-    font-family: "Segoe UI", sans-serif;
-    background: transparent;
+    font-family:"Segoe UI",sans-serif;
+    background:transparent;
     padding:20px;
 }
 
@@ -36,13 +37,12 @@ body{
     position:relative;
     width:100%;
     height:100%;
-    transition:transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     transform-style:preserve-3d;
+    transition:transform .8s cubic-bezier(.4,0,.2,1);
 }
 
-/* Enhanced 3D lift on hover when card isn't flipped */
-.card:hover .card-inner:not(.flipped) {
-    transform: translateY(-4px);
+.card:hover .card-inner{
+    transform:translateY(-4px);
 }
 
 .card.flipped .card-inner{
@@ -54,95 +54,108 @@ body{
     position:absolute;
     width:100%;
     height:100%;
-    backface-visibility:hidden;
     border-radius:16px;
     overflow:hidden;
-    /* Rich, ambient shadow depth */
-    box-shadow: 0 12px 35px rgba(0,0,0,0.2), 0 4px 15px rgba(0,0,0,0.15);
+    backface-visibility:hidden;
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.20),
+        0 4px 15px rgba(0,0,0,.15);
 }
+
+/* FRONT SIDE */
 
 .front{
     background:#fafafa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:12px;
 }
 
-/* Changed to contain to stop image cropping */
 .front img{
     width:100%;
     height:100%;
     object-fit:contain;
+    object-position:center;
+    display:block;
 }
 
-/* Glassmorphism Wrapper Setup */
+/* BACK SIDE */
+
 .back{
-    background: rgba(255, 255, 255, 0.1); 
     transform:rotateY(180deg);
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
-    padding:20px;
     text-align:center;
+    overflow:hidden;
 }
 
-/* The structural background layer that handles the blurred photo */
-.back-background {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    background-size: cover;
-    background-position: center;
-    filter: blur(20px) brightness(0.65);
-    z-index: 1;
+.back-background{
+    position:absolute;
+    top:-20px;
+    left:-20px;
+    right:-20px;
+    bottom:-20px;
+
+    background-size:cover;
+    background-position:center;
+
+    filter:blur(35px) brightness(.55);
+    transform:scale(1.15);
+
+    z-index:1;
 }
 
-/* The structural glass overlay sheet */
-.back-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 16px;
-    z-index: 2;
+.back-overlay{
+    position:absolute;
+    inset:0;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.30),
+        inset 0 -1px 1px rgba(255,255,255,.10);
+
+    z-index:2;
 }
 
-/* Content layer pushed above the glass styling */
-.back-content {
-    position: relative;
-    z-index: 3;
-    color: #ffffff;
+.back-content{
+    position:relative;
+    z-index:10;
+    padding:20px;
+    color:white;
 }
 
 .back-content h3{
     margin-bottom:12px;
-    color:#ffffff;
     font-size:22px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    text-shadow:0 2px 4px rgba(0,0,0,.5);
 }
 
 .back-content p{
+    font-size:14px;
+    line-height:1.6;
     color:#f5f5f5;
-    line-height:1.5;
-    font-size: 14px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-shadow:0 1px 3px rgba(0,0,0,.5);
 }
 
 .back-content small{
-    display: block;
+    display:block;
     margin-top:20px;
     color:#e0e0e0;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    font-size:11px;
+    text-shadow:0 1px 2px rgba(0,0,0,.5);
 }
+
+/* RESPONSIVE */
 
 @media (max-width:1400px){
     .calendar-container{
@@ -162,176 +175,241 @@ body{
 
 <div class="calendar-container">
 
+    <!-- CARD 1 -->
     <div class="card">
         <div class="card-inner">
+
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/1.png" alt="Event 1">
             </div>
+
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
+
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
+
         </div>
     </div>
 
+    <!-- CARD 2 -->
     <div class="card">
         <div class="card-inner">
+
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/2.png" alt="Event 2">
             </div>
+
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
+
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
+
         </div>
     </div>
 
+    <!-- CARD 3 -->
     <div class="card">
         <div class="card-inner">
+
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/3.png" alt="Event 3">
             </div>
+
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
+
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
+
         </div>
     </div>
 
+    <!-- CARD 4 -->
     <div class="card">
         <div class="card-inner">
+
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/4.png" alt="Event 4">
             </div>
+
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
+
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
+
         </div>
     </div>
 
+    <!-- CARD 5 -->
     <div class="card">
         <div class="card-inner">
+
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/5.png" alt="Event 5">
             </div>
+
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
+
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
+
         </div>
     </div>
 
+    <!-- CARD 6 -->
     <div class="card">
         <div class="card-inner">
+
             <div class="front">
                 <img src="https://quaelmikael.github.io/car/6.png" alt="Event 6">
             </div>
+
             <div class="back">
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
+
                 <div class="back-content">
                     <h3>Event Title</h3>
                     <p>Event description goes here.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
+
         </div>
     </div>
 
 </div>
 
 <script>
-// Click-to-Flip logic execution
+
+/* Flip Cards */
+
 document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", () => {
         card.classList.toggle("flipped");
     });
 });
 
-// Sync image source to the glass reflection panel backend
-function syncCardBackground(imgElement) {
-    const card = imgElement.closest('.card');
-    if (card) {
-        const backBg = card.querySelector('.back-background');
-        if (backBg) {
-            backBg.style.backgroundImage = `url('${imgElement.src}')`;
-        }
+/* Sync image onto blurred background */
+
+function syncCardBackground(imgElement){
+
+    const card = imgElement.closest(".card");
+
+    if(!card) return;
+
+    const bg = card.querySelector(".back-background");
+
+    if(bg){
+        bg.style.backgroundImage = `url("${imgElement.src}")`;
     }
 }
 
-// Case-Insensitivity, Extension Safety Engine, & UI Binder
-document.querySelectorAll('.front img').forEach(img => {
+/* Initialize all cards */
+
+document.querySelectorAll(".front img").forEach(img => {
+
     img.dataset.attempt = "0";
-    
-    // Sync initial load successfully
-    img.addEventListener('load', function() {
-        syncCardBackground(this);
-    });
-    
-    // Direct initialization fix for cached elements
-    if (img.complete) {
+
+    function updateBackground(){
         syncCardBackground(img);
     }
-    
-    // Self-corrective fallback engine
-    img.addEventListener('error', function() {
+
+    if(img.complete && img.naturalWidth > 0){
+        updateBackground();
+    }
+
+    img.addEventListener("load", updateBackground);
+
+    img.addEventListener("error", function(){
+
         let attempt = parseInt(this.dataset.attempt);
+
         const baseUrl = "https://quaelmikael.github.io/car/";
-        const cardNum = this.alt.replace("Event ", ""); 
-        
+        const cardNum = this.alt.replace("Event ","");
+
         attempt++;
-        this.dataset.attempt = attempt.toString();
-        
-        if (attempt === 1) {
-            this.src = baseUrl + cardNum + ".PNG";
-        } else if (attempt === 2) {
-            this.src = baseUrl + cardNum + ".jpg";
-        } else if (attempt === 3) {
-            this.src = baseUrl + cardNum + ".JPG";
-        } else if (attempt === 4) {
-            this.src = baseUrl + cardNum + ".jpeg";
-        } else if (attempt === 5) {
-            this.src = baseUrl + cardNum + ".JPEG";
-        } else {
-            const frontDiv = this.parentElement;
-            frontDiv.innerHTML = `
-                <div style="padding: 20px; text-align: center; color: #b71c1c; font-size: 13px; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; background: #ffebee;">
-                    <strong>Image Missing</strong>
-                    <span style="font-size: 11px; color: #555; margin-top: 8px; line-height: 1.4;">
-                        File <strong>${cardNum}</strong> not found with extensions checked (.png, .jpg, .jpeg) in root repository folder.
-                    </span>
-                </div>`;
+        this.dataset.attempt = attempt;
+
+        if(attempt === 1){
+            this.src = `${baseUrl}${cardNum}.PNG`;
         }
-        syncCardBackground(this);
+        else if(attempt === 2){
+            this.src = `${baseUrl}${cardNum}.jpg`;
+        }
+        else if(attempt === 3){
+            this.src = `${baseUrl}${cardNum}.JPG`;
+        }
+        else if(attempt === 4){
+            this.src = `${baseUrl}${cardNum}.jpeg`;
+        }
+        else if(attempt === 5){
+            this.src = `${baseUrl}${cardNum}.JPEG`;
+        }
+        else{
+
+            this.parentElement.innerHTML = `
+                <div style="
+                    width:100%;
+                    height:100%;
+                    display:flex;
+                    flex-direction:column;
+                    justify-content:center;
+                    align-items:center;
+                    text-align:center;
+                    padding:20px;
+                    background:#ffebee;
+                    color:#b71c1c;
+                ">
+                    <strong>Image Missing</strong>
+                    <span style="font-size:12px;margin-top:8px;">
+                        File ${cardNum} not found.
+                    </span>
+                </div>
+            `;
+        }
     });
+
 });
+
+/* Final sync after page fully loads */
+
+window.addEventListener("load", () => {
+    document.querySelectorAll(".front img")
+        .forEach(syncCardBackground);
+});
+
 </script>
 
 </body>
 </html>
+```
