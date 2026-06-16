@@ -60,19 +60,19 @@ body{
         0 4px 15px rgba(0,0,0,.15);
 }
 
-/* FRONT SIDE - Optimized to prevent borders and artificial clipping */
+/* FRONT SIDE - Optimized to completely display the image without padding */
 .front{
-    background:#fafafa;
+    background:transparent; /* Removed background so image curves blend perfectly */
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:0; /* Removed the 12px padding causing white borders */
+    padding:0; 
 }
 
 .front img{
     width:100%;
     height:100%;
-    object-fit:cover; /* Changed from contain to cover so it fills the 340px height perfectly */
+    object-fit:contain; /* Ensures the whole photo is completely displayed */
     object-position:center;
     display:block;
 }
