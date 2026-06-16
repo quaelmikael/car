@@ -112,11 +112,10 @@ body{
 
 <div class="calendar-container">
 
-    <!-- CARD 1 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
-                <img src="https://raw.githubusercontent.com/quaelmikael/car/main/1.png" alt="Event 1">
+                <img src="https://quaelmikael.github.io/car/1.png" alt="Event 1">
             </div>
             <div class="back">
                 <h3>Event Title</h3>
@@ -126,11 +125,10 @@ body{
         </div>
     </div>
 
-    <!-- CARD 2 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
-                <img src="https://raw.githubusercontent.com/quaelmikael/car/main/2.png" alt="Event 2">
+                <img src="https://quaelmikael.github.io/car/2.png" alt="Event 2">
             </div>
             <div class="back">
                 <h3>Event Title</h3>
@@ -139,11 +137,10 @@ body{
         </div>
     </div>
 
-    <!-- CARD 3 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
-                <img src="https://raw.githubusercontent.com/quaelmikael/car/main/3.png" alt="Event 3">
+                <img src="https://quaelmikael.github.io/car/3.png" alt="Event 3">
             </div>
             <div class="back">
                 <h3>Event Title</h3>
@@ -152,11 +149,10 @@ body{
         </div>
     </div>
 
-    <!-- CARD 4 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
-                <img src="https://raw.githubusercontent.com/quaelmikael/car/main/4.png" alt="Event 4">
+                <img src="https://quaelmikael.github.io/car/4.png" alt="Event 4">
             </div>
             <div class="back">
                 <h3>Event Title</h3>
@@ -165,11 +161,10 @@ body{
         </div>
     </div>
 
-    <!-- CARD 5 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
-                <img src="https://raw.githubusercontent.com/quaelmikael/car/main/5.png" alt="Event 5">
+                <img src="https://quaelmikael.github.io/car/5.png" alt="Event 5">
             </div>
             <div class="back">
                 <h3>Event Title</h3>
@@ -178,11 +173,10 @@ body{
         </div>
     </div>
 
-    <!-- CARD 6 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
-                <img src="https://raw.githubusercontent.com/quaelmikael/car/main/6.png" alt="Event 6">
+                <img src="https://quaelmikael.github.io/car/6.png" alt="Event 6">
             </div>
             <div class="back">
                 <h3>Event Title</h3>
@@ -194,9 +188,51 @@ body{
 </div>
 
 <script>
+// Smooth Flip Animation Toggle
 document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", () => {
         card.classList.toggle("flipped");
+    });
+});
+
+// Case-Insensitivity & Extension Fallback Engine
+document.querySelectorAll('.front img').forEach(img => {
+    img.dataset.attempt = "0";
+    
+    img.addEventListener('error', function() {
+        let attempt = parseInt(this.dataset.attempt);
+        const baseUrl = "https://quaelmikael.github.io/car/";
+        const cardNum = this.alt.replace("Event ", ""); 
+        
+        attempt++;
+        this.dataset.attempt = attempt.toString();
+        
+        if (attempt === 1) {
+            // Try uppercase PNG
+            this.src = baseUrl + cardNum + ".PNG";
+        } else if (attempt === 2) {
+            // Try lowercase JPG
+            this.src = baseUrl + cardNum + ".jpg";
+        } else if (attempt === 3) {
+            // Try uppercase JPG
+            this.src = baseUrl + cardNum + ".JPG";
+        } else if (attempt === 4) {
+            // Try lowercase JPEG
+            this.src = baseUrl + cardNum + ".jpeg";
+        } else if (attempt === 5) {
+            // Try uppercase JPEG
+            this.src = baseUrl + cardNum + ".JPEG";
+        } else {
+            // If everything fails, display a diagnostic notice on the card front
+            const frontDiv = this.parentElement;
+            frontDiv.innerHTML = `
+                <div style="padding: 20px; text-align: center; color: #b71c1c; font-size: 13px; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; background: #ffebee;">
+                    <strong>Image ${cardNum} Not Found</strong>
+                    <span style="font-size: 11px; color: #555; margin-top: 8px; line-height: 1.4;">
+                        Confirm that <strong>${cardNum}</strong> exists at the root of your repository and isn't nested inside an 'images' folder.
+                    </span>
+                </div>`;
+        }
     });
 });
 </script>
