@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calendar Events</title>
+<title>SEA InnovAItors Sessions</title>
 
 <style>
 *{
@@ -21,8 +20,8 @@ body{
 
 .calendar-container{
     display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:20px;
+    grid-template-columns:repeat(5,minmax(180px,1fr));
+    gap:16px;
     width:100%;
 }
 
@@ -30,14 +29,14 @@ body{
     height:340px;
     perspective:1200px;
     cursor:pointer;
-    background:transparent !important; /* Forces container to stay transparent */
+    background:transparent !important;
 }
 
 .card-inner{
     position:relative;
     width:100%;
     height:100%;
-    background:transparent !important; /* Forces inner container to stay transparent */
+    background:transparent !important;
     transform-style:preserve-3d;
     -webkit-transform-style:preserve-3d;
     transition:transform .8s cubic-bezier(.4,0,.2,1);
@@ -59,24 +58,20 @@ body{
     border-radius:16px;
     overflow:hidden;
     backface-visibility:hidden;
-    -webkit-backface-visibility:hidden; /* Essential for removing flipping artifacts */
+    -webkit-backface-visibility:hidden;
     box-shadow:
         0 12px 35px rgba(0,0,0,.20),
         0 4px 15px rgba(0,0,0,.15);
 }
 
-/* FRONT SIDE - Color is locked strictly inside this container */
 .front{
-    background:#05243c !important; 
+    background:#05243c !important;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:0; 
-    transform: rotateY(0deg); 
-    -webkit-transform: rotateY(0deg);
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    padding:0;
+    transform:rotateY(0deg);
+    -webkit-transform:rotateY(0deg);
 }
 
 .front img{
@@ -88,21 +83,6 @@ body{
     border:none;
 }
 
-/* ERROR STATE STYLING */
-.image-error-fallback {
-    width:100%;
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-    background:#ffebee;
-    color:#b71c1c;
-}
-
-/* BACK SIDE - Fully isolated with zero color bleeding from the front */
 .back{
     transform:rotateY(180deg);
     -webkit-transform:rotateY(180deg);
@@ -112,9 +92,6 @@ body{
     text-align:center;
     overflow:hidden;
     background:transparent;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
 }
 
 .back-background{
@@ -137,44 +114,42 @@ body{
     backdrop-filter:blur(16px);
     -webkit-backdrop-filter:blur(16px);
     border:1px solid rgba(255,255,255,.25);
-    box-shadow:
-        inset 0 1px 1px rgba(255,255,255,.30),
-        inset 0 -1px 1px rgba(255,255,255,.10);
     z-index:2;
 }
 
 .back-content{
     position:relative;
     z-index:10;
-    padding:20px;
+    padding:18px;
     color:white;
 }
 
 .back-content h3{
-    margin-bottom:12px;
-    font-size:22px;
+    margin-bottom:10px;
+    font-size:18px;
+    line-height:1.25;
     text-shadow:0 2px 4px rgba(0,0,0,.5);
 }
 
 .back-content p{
-    font-size:14px;
-    line-height:1.6;
+    font-size:13px;
+    line-height:1.45;
     color:#f5f5f5;
     text-shadow:0 1px 3px rgba(0,0,0,.5);
 }
 
 .back-content small{
     display:block;
-    margin-top:20px;
+    margin-top:15px;
     color:#e0e0e0;
     text-transform:uppercase;
     letter-spacing:.5px;
     font-size:11px;
-    text-shadow:0 1px 2px rgba(0,0,0,.5);
 }
 
 /* RESPONSIVE */
-@media (max-width:1400px){
+
+@media (max-width:1200px){
     .calendar-container{
         grid-template-columns:repeat(3,1fr);
     }
@@ -185,12 +160,20 @@ body{
         grid-template-columns:repeat(2,1fr);
     }
 }
+
+@media (max-width:480px){
+    .calendar-container{
+        grid-template-columns:1fr;
+    }
+}
 </style>
 </head>
+
 <body>
 
 <div class="calendar-container">
 
+    <!-- SESSION 1 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
@@ -200,14 +183,15 @@ body{
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
                 <div class="back-content">
-                    <h3>Project Kickoff</h3>
-                    <p>This introductory session sets the foundation for the entire program by exploring both the potential and risks of AI in entrepreneurial settings. Participants will be encouraged to think critically about how AI should be used within their businesses and communities while considering issues such as cybersecurity, data protection, transparency, and accountability.</p>
+                    <h3>AI Foundations and Responsible Innovation</h3>
+                    <p>Participants are introduced to the fundamentals of artificial intelligence, emerging trends, and practical business applications. The session also explores cybersecurity, data privacy, ethics, and responsible AI use, helping participants identify business challenges and opportunities that can be addressed through their capstone projects.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- SESSION 2 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
@@ -217,14 +201,15 @@ body{
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
                 <div class="back-content">
-                    <h3>AI for Operations</h3>
-                    <p>This session explores how AI can be applied to operational challenges across different industries and organizational contexts. Participants will learn from practical experiences and examples that demonstrate how AI can support productivity and improve the way work gets done.</p>
+                    <h3>AI for Operations and Finance</h3>
+                    <p>Participants learn how AI can improve operational efficiency and strengthen financial decision-making. Through hands-on activities and practical demonstrations, they explore AI tools for workflow automation, productivity, budgeting, forecasting, and business planning while developing components of their capstone projects.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- SESSION 3 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
@@ -234,14 +219,15 @@ body{
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
                 <div class="back-content">
-                    <h3>Mentorship and Focused Group Discussion</h3>
-                    <p>This session provides participants with an opportunity to engage in focused discussions with mentors and fellow entrepreneurs on their AI adoption journey. Participants may schedule one-on-one or small-group mentorship consultations to address challenges, refine implementation strategies, and receive tailored guidance.</p>
+                    <h3>AI for Marketing and Scaling AI Solutions</h3>
+                    <p>Participants explore how AI can support marketing, customer engagement, and business growth. The session also examines strategies for sustainable AI adoption, helping participants assess the feasibility, scalability, and long-term impact of their proposed solutions.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- SESSION 4 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
@@ -251,14 +237,15 @@ body{
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
                 <div class="back-content">
-                    <h3>AI for Finance and Marketing</h3>
-                    <p>This session explores how AI can help entrepreneurs better understand their customers and markets, identify opportunities for growth, and strengthen engagement strategies. Participants will be exposed to different perspectives and approaches that demonstrate how AI can support customer discovery, market analysis, audience engagement, and strategic decision-making.</p>
+                    <h3>Capstone Development and Mentorship</h3>
+                    <p>Participants refine their capstone projects through mentor coaching, peer feedback, and collaborative discussions. The session focuses on strengthening project design, incorporating insights from previous sessions, and preparing participants for their final presentations.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- SESSION 5 -->
     <div class="card">
         <div class="card-inner">
             <div class="front">
@@ -268,25 +255,8 @@ body{
                 <div class="back-background"></div>
                 <div class="back-overlay"></div>
                 <div class="back-content">
-                     <h3>Mentorship and Focused Group Discussion</h3>
-                    <p>This session provides participants with an opportunity to engage in focused discussions with mentors and fellow entrepreneurs on their AI adoption journey. Participants may schedule one-on-one or small-group mentorship consultations to address challenges, refine implementation strategies, and receive tailored guidance.</p>
-                    <small>Click again to flip back</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-inner">
-            <div class="front">
-                <img src="https://quaelmikael.github.io/car/6.png" alt="Event 6">
-            </div>
-            <div class="back">
-                <div class="back-background"></div>
-                <div class="back-overlay"></div>
-                <div class="back-content">
-                    <h3>Closing Session</h3>
-                    <p>Participants will present an AI-Enhanced Business Improvement Project that integrates learning from the entire program.</p>
+                    <h3>AI Leadership and Capstone Showcase</h3>
+                    <p>Participants reflect on emerging AI trends and their implications for entrepreneurship and innovation in Southeast Asia. The program concludes with the SEA InnovAItors Showcase, where participants present their capstone projects and share the solutions they have developed throughout the program.</p>
                     <small>Click again to flip back</small>
                 </div>
             </div>
@@ -296,61 +266,33 @@ body{
 </div>
 
 <script>
-/* Flip Cards */
 document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", () => {
         card.classList.toggle("flipped");
     });
 });
 
-/* Sync image onto blurred background */
 function syncCardBackground(imgElement){
     const card = imgElement.closest(".card");
     if(!card) return;
+
     const bg = card.querySelector(".back-background");
-    if(bg && imgElement.src && !imgElement.src.includes('undefined')){
+
+    if(bg){
         bg.style.backgroundImage = `url("${imgElement.src}")`;
     }
 }
 
-/* Initialize all cards and image fallbacks */
-const extensions = ["PNG", "jpg", "JPG", "jpeg", "JPEG"];
-const baseUrl = "https://quaelmikael.github.io/car/";
-
 document.querySelectorAll(".front img").forEach(img => {
-    img.dataset.attempt = "0";
 
-    img.addEventListener("load", function() {
+    img.addEventListener("load", function(){
         syncCardBackground(this);
     });
 
-    if(img.complete && img.naturalWidth > 0){
+    if(img.complete){
         syncCardBackground(img);
     }
 
-    img.addEventListener("error", function() {
-        let attempt = parseInt(this.dataset.attempt);
-        const cardNum = this.alt.replace("Event ","").trim();
-
-        if (attempt < extensions.length) {
-            const nextExt = extensions[attempt];
-            this.dataset.attempt = attempt + 1;
-            this.src = `${baseUrl}${cardNum}.${nextExt}`;
-        } else {
-            this.style.display = "none";
-            
-            const parent = this.parentElement;
-            if(!parent.querySelector('.image-error-fallback')) {
-                const errorDiv = document.createElement("div");
-                errorDiv.className = "image-error-fallback";
-                errorDiv.innerHTML = `
-                    <strong>Image Missing</strong>
-                    <span style="font-size:12px;margin-top:8px;">File ${cardNum} not found.</span>
-                `;
-                parent.appendChild(errorDiv);
-            }
-        }
-    });
 });
 </script>
 
